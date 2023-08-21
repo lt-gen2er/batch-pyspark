@@ -32,7 +32,7 @@ def test_transform(etl_pipeline):
     input_path = "tests/sample_data.csv"
     data = etl_pipeline.extract(input_path)
     transformed_data = etl_pipeline.transform(data)
-    sample_output_path = "tests/sample_output"
+    sample_output_path = "tests/sample_output_data.csv"
     sample_output_data = etl_pipeline.extract(sample_output_path)
     assert compare_data_content(transformed_data, sample_output_data) == True
 
