@@ -6,7 +6,7 @@ on:
       - main
 
 jobs:
-  build:
+  unit-test-pipeline:
     runs-on: ubuntu-latest
 
     steps:

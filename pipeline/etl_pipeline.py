@@ -1,4 +1,5 @@
 from pyspark.sql import SparkSession
+from modules.slow_task_notification import slow_task_notification
 
 class ETLPipeline:
     def __init__(self, spark_session):
@@ -14,6 +15,7 @@ class ETLPipeline:
     def load(self, transformed_data, output_path):
         transformed_data.write.mode("overwrite").csv(output_path, header=True)
 
+@slow_task_notification(10, "TEAMS_WEBHOOK_URL")
 def main():
     spark = SparkSession.builder.appName("ETLPipeline").getOrCreate()
     etl_pipeline = ETLPipeline(spark)

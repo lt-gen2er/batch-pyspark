@@ -1,5 +1,6 @@
 import sys
 import os
+from functions.functions import compare_data_content
 
 # Add the root directory of your project to the sys.path
 project_root = os.path.abspath(os.path.join(os.path.dirname(__file__), '..'))
@@ -26,12 +27,12 @@ def test_extract(etl_pipeline):
 
 def test_transform(etl_pipeline):
     # Sample data for testing transformation
-    sample_data = [("Alice", 25), ("Bob", 17), ("Charlie", 30)]
-    schema = ["Name", "Age"]
-    input_df = etl_pipeline.spark.createDataFrame(sample_data, schema=schema)
-
-    transformed_data = etl_pipeline.transform(input_df)
-    assert transformed_data.count() == 2  # Two people are older than 18
+    input_path = "tests/sample_data.csv"
+    data = etl_pipeline.extract(input_path)
+    transformed_data = etl_pipeline.transform(data)
+    sample_output_path = "tests/sample_output"
+    sample_output_data = etl_pipeline.extract(sample_output_path)
+    assert compare_data_content(transformed_data, sample_output_data) == True
 
 # Add more tests for other components and scenarios
 
