@@ -1,3 +1,10 @@
+import sys
+import os
+
+# Add the root directory of your project to the sys.path
+project_root = os.path.abspath(os.path.join(os.path.dirname(__file__), '..'))
+sys.path.insert(0, project_root)
+
 import pytest
 from pyspark.sql import SparkSession
 from pipeline.etl_pipeline import ETLPipeline
@@ -13,7 +20,7 @@ def etl_pipeline(spark_session):
     return ETLPipeline(spark_session)
 
 def test_extract(etl_pipeline):
-    input_path = "sample_data.csv"  # Provide a sample CSV file for testing
+    input_path = "tests/sample_data.csv"  # Provide a sample CSV file for testing
     data = etl_pipeline.extract(input_path)
     assert data.count() > 0
 
