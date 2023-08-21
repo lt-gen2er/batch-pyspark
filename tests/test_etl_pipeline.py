@@ -16,9 +16,11 @@ def spark_session():
     yield spark
     spark.stop()
 
+"""
 @pytest.fixture
 def etl_pipeline(spark_session):
     return ETLPipeline(spark_session)
+"""
 
 def test_extract(etl_pipeline):
     input_path = "tests/sample_data.csv"  # Provide a sample CSV file for testing
