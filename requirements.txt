@@ -1,0 +1,2 @@
+pyspark==3.2.0  # Update to the appropriate version of PySpark
+pytest==6.2.5
